@@ -1,0 +1,11 @@
+# ignore these directories
+**/build/
+**/CMakeFiles/
+**/CMakeCache.txt
+**/CMakeScripts/
+**/FreeRTOS/
+**/pico-sdk/
+**/picotool/
+
+# ignore these files
+*.swp
