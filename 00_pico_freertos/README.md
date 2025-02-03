@@ -1,11 +1,19 @@
-# FreeRTOS sample Pico Program
+# FreeRTOS Pico Program 00
 
-I am starting to get into playing around with the FreeRTOS project.
-- This repo was copied from the pico-examples/freertos/ 
-- I played around with the CMakeLists.txt file in order to get the project to build locally on my computer
-- I may in the future move this to it's own repo but that would require me chaning directories that would affect the general pico project so I am using this for testing grounds for now.
+- Program adapted from the pico-examples/freertos repo.
+- This program can executed to ensure that the environment is setup properly (environment variables set properly, etc)
 
 # Pico SDK Project Setup Steps
 # Build Project via Linux Terminal
+
+Navigate to build dir and execute cmake & make
+```
+	mkdir build
+	cd build
+	cmake .. && make
+	
+	# For generating build logs for debugging...
+	# cmake --trace-expand .. 2>&1 | tee cmake_build_output.txt && make 2>&1 | tee make_build_output.txt
+```
 # Project Learnings
 
