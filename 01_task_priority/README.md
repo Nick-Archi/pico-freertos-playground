@@ -74,7 +74,7 @@ A) This is a Software routine that will determine which RTOS task executes on th
 
 Q) What is priority?
 A) A method to give order to the tasks that will be executed by the scheduler.
-AA) If priority was: 0 highest, 3 lowest, if the scheduler was currently executing task 1, priority 2 and task 2, priority 1 needed to run, then the cpu will yield for task 2.
+AA) If priority was: 0 highest, 3 lowest, if the scheduler was currently executing task 1 (priority 2) and task 2 (priority 1) needed to run, then the cpu will yield for task 2.
 
 Q) What is context switching?
 A) When the current state of the CPU and Memory needs to be saved for the current task so that the next task can have a "clean slate" to work with.  
