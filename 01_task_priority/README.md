@@ -5,7 +5,7 @@
 [Objective](#objective)<br>
 [Building](#building)<br>
 [Executing](#executing)<br>
-[Useful_Commands](#useful commands)<br>
+[Useful](#useful)<br>
 [Learnings](#learnings)<br>
 
 ## Overview
@@ -57,7 +57,7 @@ Flash the built .uf2 file onto the Raspberry Pi Pico
 	# Drag & drop the .uf2 file into the location of where the Pico2 was connected
 ```
 
-## Useful Commands 
+## Useful
 - View logs from the Kernel to see USB connections
 ```
 	$ watch -n 1 "sudo dmesg" | tail -n 20"
