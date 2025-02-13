@@ -1,6 +1,6 @@
 # FreeRTOS Pico Program 000: Beginning of Something
 
-This was my 1st attempt at trying to build the FreeRTOS for the Raspberry Pi Pico2 (RP2350) without an IDE. I struggled a bit as I didn't find that many resourcesand heavily relied on CMake documentation to debug things (shoutout execute_process(COMMAND read -p "DEBUG") and message()). 
+This was my 1st attempt at trying to build the FreeRTOS for the Raspberry Pi Pico2 (RP2350) without an IDE. I struggled a bit as I didn't find that many resources and heavily relied on CMake documentation to debug things (shoutout execute_process(COMMAND read -p "DEBUG") and message()). 
 
 It took me a couple of days but it works...
 
@@ -12,7 +12,7 @@ It took me a couple of days but it works...
 [Useful](#useful)<br>
 
 ## Overview
-- Program adapted from the [pico-examples/hello_freertos](https://github.com/raspberrypi/pico-examples/freertos).
+- Program adapted from the [pico-examples/hello_freertos](https://github.com/raspberrypi/pico-examples/).
 - This program can executed to ensure that the environment is setup properly (environment variables set properly, etc)
 - By viewing the CMakeLists.txt, you should get an idea of how the project is setup but if it's not obvious then the [Pico SDK](https://github.com/raspberrypi/pico-sdk) and [FreeRTOS-Kernel](https://github.com/FreeRTOS/FreeRTOS/) are downloaded from their respective repos and set as environment variables. 
 
