@@ -1,4 +1,4 @@
-# Freeing FreeRTOS on the Raspberry Pico
+# Freeing FreeRTOS on the Raspberry Pico2
 
 Welcome to my project repo!
 
