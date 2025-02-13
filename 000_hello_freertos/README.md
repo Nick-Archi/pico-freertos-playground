@@ -12,9 +12,9 @@ It took me a couple of days but it works...
 [Useful](#useful)<br>
 
 ## Overview
-- Program adapted from the [pico-examples/freertos repo](https://www.freertos.org/).
+- Program adapted from the [pico-examples/hello_freertos](https://github.com/raspberrypi/pico-examples/freertos).
 - This program can executed to ensure that the environment is setup properly (environment variables set properly, etc)
-- By viewing the CMakeLists.txt, you should get an idea of how the project is setup but if it's not obvious then the [Pico SDK](https://github.com/raspberrypi/pico-sdk) and [FreeRTOS-Kernel](https://github.com/FreeRTOS/FreeRTOS/releases) are downloaded from their respective repos and set as environment variables. 
+- By viewing the CMakeLists.txt, you should get an idea of how the project is setup but if it's not obvious then the [Pico SDK](https://github.com/raspberrypi/pico-sdk) and [FreeRTOS-Kernel](https://github.com/FreeRTOS/FreeRTOS/) are downloaded from their respective repos and set as environment variables. 
 
 ## Building
 Navigate to build dir and execute cmake & make
