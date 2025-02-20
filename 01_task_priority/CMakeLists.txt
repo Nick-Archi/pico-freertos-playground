@@ -4,6 +4,8 @@ set(PICO_PLATFORM "rp2350-arm-s" CACHE STRING "Targeting pico 2350 specifically 
 
 set(SOURCE_DIR "src/")
 set(EXEC1_NAME "project1")
+set(EXEC2_NAME "project2")
+set(EXEC3_NAME "blink")
 
 # initialize the SDK based on PICO_SDK_PATH
 # note: this happens before the project()
@@ -21,6 +23,15 @@ add_executable(${EXEC1_NAME}
     ${SOURCE_DIR}main.c
     ${FREERTOS_SRC_FILES}
 )
+add_executable(${EXEC2_NAME} 
+    ${SOURCE_DIR}main2.c
+    ${FREERTOS_SRC_FILES}
+)
+add_executable(${EXEC3_NAME} 
+    ${SOURCE_DIR}blink_tasks.c
+    ${FREERTOS_SRC_FILES}
+)
+
 
 # add pico_stdlib library which aggregates commonly used features
 target_link_libraries(${EXEC1_NAME} 
@@ -28,11 +39,31 @@ target_link_libraries(${EXEC1_NAME}
     FreeRTOS-Kernel-Heap4
 )
 
+target_link_libraries(${EXEC2_NAME} 
+    pico_stdlib 
+    FreeRTOS-Kernel-Heap4
+)
+
+target_link_libraries(${EXEC3_NAME} 
+    pico_stdlib 
+    FreeRTOS-Kernel-Heap4
+)
+
 target_include_directories(${EXEC1_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(${EXEC2_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(${EXEC3_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 # tell compiler to use the USB output and disable UART output
 pico_enable_stdio_usb(${EXEC1_NAME} 1)
 pico_enable_stdio_uart(${EXEC1_NAME} 0)
 
+pico_enable_stdio_usb(${EXEC2_NAME} 1)
+pico_enable_stdio_uart(${EXEC2_NAME} 0)
+
+pico_enable_stdio_usb(${EXEC3_NAME} 1)
+pico_enable_stdio_uart(${EXEC3_NAME} 0)
+
 # create map/bin/hex/uf2 file in addition to ELF.
 pico_add_extra_outputs(${EXEC1_NAME})
+pico_add_extra_outputs(${EXEC2_NAME})
+pico_add_extra_outputs(${EXEC3_NAME})
