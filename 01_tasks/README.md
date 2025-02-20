@@ -1,4 +1,4 @@
-# FreeRTOS Pico Program 01: Task Priority 
+# FreeRTOS Pico Program 01: Tasks
 
 ## Table of Content
 [Overivew](#overview)<br>
