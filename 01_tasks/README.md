@@ -3,6 +3,7 @@
 ## Table of Content
 [Overivew](#overview)<br>
 [Objective](#objective)<br>
+[Sources](#sources)<br>
 [Building](#building)<br>
 [Executing](#executing)<br>
 [Useful](#useful)<br>
@@ -13,9 +14,9 @@ The Raspberry RP2350 uses a pre-emptive, fixed priority scheduling policy with r
 
 In simpler terms:
 - priority for tasks will not change during execution
-- task that has higher priority will obtain core 1st
-- tasks with same priority will take turns running
-- scheduler will switch between different tasks of equal priority during tick interrupt
+- task that has higher priority takes precedence on core
+- tasks with same priority will take turns running (time-slicing/round-robin)
+- scheduler will switch between different tasks of equal priority during tick interrupt (time-slicing/round-robin)
 
 So the FreeRTOS will make it seem as if multiple tasks are running concurrently!
 ![Scheduler performing multitasking](images/context_switching.png)
@@ -33,11 +34,25 @@ Tasks have a state tied with them:
 ## Objective
 [] Create an application that will spin up a couple of tasks to showcase priority and scheduling concepts.
 
+## Sources
+So I continued reading Chapter 4 in the FreeRTOS Kernel documentation and started practicing a bit more with tasks.
+
+Simple_Tasks:
+[] Pretty simple source file where I wanted to play around with creating tasks of different priorities to see how the scheduler allocates execution time. 
+
+Starve_Tasks:
+[] Wanted to see what happens when a higher priority thread takes up most of the execution time.
+
+Blink_Tasks:
+[] Not really that different from the Simple_Tasks source but wanted to blink some LEDs as tasks. Just playing around with tasks of the same priority having different delay times.
+
 ## Setup
 Modify the FreeRTOSConfig.h:
 - Update the configMAX_PRIORITES
 - Enable Time Slicing
     - update configUSE_TIME_SLICING = 1
+- Modify the rate at which Tick Interrupts occur
+    - update 
 
 ## Building
 

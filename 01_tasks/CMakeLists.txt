@@ -3,9 +3,9 @@ cmake_minimum_required(VERSION 3.22)
 set(PICO_PLATFORM "rp2350-arm-s" CACHE STRING "Targeting pico 2350 specifically the arm core")
 
 set(SOURCE_DIR "src/")
-set(EXEC1_NAME "project1")
-set(EXEC2_NAME "project2")
-set(EXEC3_NAME "blink")
+set(EXEC1_NAME "simple_tasks")
+set(EXEC2_NAME "starve_tasks")
+set(EXEC3_NAME "blink_tasks")
 
 # initialize the SDK based on PICO_SDK_PATH
 # note: this happens before the project()
@@ -20,11 +20,11 @@ pico_sdk_init()
 # rest of proj
 
 add_executable(${EXEC1_NAME} 
-    ${SOURCE_DIR}main.c
+    ${SOURCE_DIR}simple_tasks.c
     ${FREERTOS_SRC_FILES}
 )
 add_executable(${EXEC2_NAME} 
-    ${SOURCE_DIR}main2.c
+    ${SOURCE_DIR}starve_tasks.c
     ${FREERTOS_SRC_FILES}
 )
 add_executable(${EXEC3_NAME} 

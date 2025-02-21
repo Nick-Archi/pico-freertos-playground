@@ -1,6 +1,8 @@
 /*
-* Objective: Wanted to witness the scheduler performing round robin
-* with LEDs connected to the gpio ports on the RP2350.
+* Objective: 
+* [] Showcase the scheduler using a round-robin approach to select tasks for execution
+* [] These tasks should blink LEDs connected to the GPIO pins of the RP2350
+* [] Showcase how a generic function could be spun up as different tasks
 */
 
 #include "FreeRTOS.h"
@@ -9,7 +11,6 @@
 #include <stdio.h>
 #include "pico/stdlib.h"
 
-#define DELAY (1500000000)
 #define LED_ON (1)
 #define LED_OFF (0)
 

@@ -22,8 +22,17 @@ typedef struct task_data_t
     int delay;
 }task_data;
 
-task_data task_data1 = {.task_number = '1', .delay = 10};
-task_data task_data2 = {.task_number = '2', .delay = 2};
+static task_data task_data1 = 
+{
+    .task_number = '1', 
+    .delay = 10
+};
+
+static task_data task_data2 = 
+{
+    .task_number = '2', 
+    .delay = 2
+};
 
 void vTaskImpl(void* pvPara)
 {

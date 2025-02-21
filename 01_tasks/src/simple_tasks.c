@@ -1,3 +1,11 @@
+/*
+* Objective: 
+* [] Showcase the scheduler using a round-robin approach to select tasks for execution
+* [] There are 3 separate functions that will all be tasks. I eventually found a way to make a generic function. Check my other source files for examples.
+* [] This source file is relatively simple, just wanted to create an example of 3 tasks that are all being swapped out by the Scheduler for execution on the CPU.
+* [] One of the tasks has a higher priority, so I wanted to see how the output onthe serial connection looks like. 
+*/
+
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
