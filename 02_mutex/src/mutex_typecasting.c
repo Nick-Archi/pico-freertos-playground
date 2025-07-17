@@ -17,9 +17,6 @@
 #include "task.h"
 
 #include "pico/stdlib.h"
-#include "hadware/spi.h"
-
-#include "SH1106_Interactions.h"
 
 #define LED_OFF 0
 #define LED_ON 1

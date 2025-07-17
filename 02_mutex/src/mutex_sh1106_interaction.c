@@ -53,19 +53,19 @@ void vTask(void* pvParameters)
     while(true)
     {
         // attempt to obtain mutex
-        if(xSemaphoreTake(mutex, pdMS_TO_TICKS(portMAX_DELAY) == pdPASS))
-        {
-//printf("Task %d obtained mutex...attempting to write to queue\n", config.task);
-//printf("Buffer = %s\n", buffer);
             // write to OLED
             itoa(config.val, buffer, 10);
             write_string(buffer, config.page, 0, sizeof(buffer) * 8);
+        if(xSemaphoreTake(mutex, pdMS_TO_TICKS(portMAX_DELAY)))
+        {
+//printf("Task %d obtained mutex...attempting to write to queue\n", config.task);
+//printf("Buffer = %s\n", buffer);
             update_sh1106();
 
             xSemaphoreGive(mutex);
             config.val++;
-            vTaskDelay(pdMS_TO_TICKS(config.delay));
         }
+        vTaskDelay(pdMS_TO_TICKS(config.delay));
     }
 }
 

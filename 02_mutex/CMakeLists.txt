@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.22)
 set(PICO_PLATFORM "rp2350-arm-s" CACHE STRING "Targeting pico 2350 specifically the arm core")
 
 set(SOURCE_DIR "src/")
-set(EXEC1_NAME "project1")
-set(EXEC2_NAME "project2")
+set(EXEC1_NAME "proj1")
+set(EXEC2_NAME "proj2")
 set(EXEC3_NAME "sh1106")
 
 # initialize the SDK based on PICO_SDK_PATH
@@ -20,27 +20,27 @@ pico_sdk_init()
 # rest of proj
 
 add_executable(${EXEC1_NAME} 
-    ${SOURCE_DIR}main.c
+    ${SOURCE_DIR}mutex_simple.c
     ${FREERTOS_SRC_FILES}
 )
 
 add_executable(${EXEC2_NAME} 
-    ${SOURCE_DIR}main2.c
+    ${SOURCE_DIR}mutex_typecasting.c
     ${FREERTOS_SRC_FILES}
 )
 
 add_executable(${EXEC3_NAME} 
-    ${SOURCE_DIR}sh1106_integration.c
+    ${SOURCE_DIR}mutex_sh1106_interaction.c
     ${FREERTOS_SRC_FILES}
 )
 
- add pico_stdlib library which aggregates commonly used features
+# add pico_stdlib library which aggregates commonly used features
 target_link_libraries(${EXEC1_NAME} 
     pico_stdlib 
     FreeRTOS-Kernel-Heap4
 )
 
- add pico_stdlib library which aggregates commonly used features
+# add pico_stdlib library which aggregates commonly used features
 target_link_libraries(${EXEC2_NAME} 
     pico_stdlib 
     FreeRTOS-Kernel-Heap4

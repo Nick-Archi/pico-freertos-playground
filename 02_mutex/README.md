@@ -1,4 +1,4 @@
-# [UNDER WORK] FreeRTOS Pico Program 02: Mutexes 
+# FreeRTOS Pico Program 02: Mutexes 
 
 ## Table of Content
 [Overivew](#overview)<br>
@@ -9,35 +9,20 @@
 [Learnings](#learnings)<br>
 
 ## Overview
-The Raspberry RP2350 uses a pre-emptive, fixed priority scheduling policy with round robin, time slicing of equal priority tasks. 
-
-In simpler terms:
-- priority for tasks will not change during execution
-- task that has higher priority will obtain core 1st
-- tasks with same priority will take turns running
-- scheduler will switch between different tasks of equal priority during tick interrupt
-
-So the FreeRTOS will make it seem as if multiple tasks are running concurrently!
-![Scheduler performing multitasking](images/context_switching.png)
-
-To switch between tasks of the same priority (round robin) there is a tick interrupt that causes the scheduler to review which task needs to run next and context switch to it.
-![Tick Interrupt](images/tick_interrupt.png)
-
-Tasks have a state tied with them:
-- Running: task is currently executing on the core
-- Ready: task is not running on core but is ready for execution
-- Blocked: task is waiting for a temporal or external event
-- Suspended: task not running but can be restarted with API calls
-![State Transitions](images/state_transition.png)
+A mutex allows tasks to share a resource, effectively limiting the usage of that resource to just 1 task. Once the task is done, it gives up the mutex for another task to then take. In this project, I want to showcase some simple examples of using a mutex as well as an example showcasing the usage of the sbm library I've been working on to interact with an OLED as the shared resource.
  
 ## Objective
-[] Create an application that will spin up a couple of tasks to showcase priority and scheduling concepts.
+- [] Executable that spins up tasks to utilize a mutex to interact with a shared resource (OLED).
 
 ## Setup
 Modify the FreeRTOSConfig.h:
 - Update the configMAX_PRIORITES
 - Enable Time Slicing
     - update configUSE_TIME_SLICING = 1
+- Enable Mutual Exclusion
+    - configUSE_MUTEXES = 1
+- Enable indefinite waits
+    - INCLUDE_vTaskSuspend = 1
 
 ## Building
 
@@ -55,6 +40,8 @@ Flash the built .uf2 file onto the Raspberry Pi Pico
 ```
 	# connect the pico2 via USB
 	# Drag & drop the .uf2 file into the location of where the Pico2 was connected
+	OR
+	$ cp <filename>.uf2 <dir_location>/RP2350
 ```
 
 ## Useful
