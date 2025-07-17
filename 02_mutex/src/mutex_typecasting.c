@@ -1,8 +1,7 @@
 /*
 * Objective:
-* In this source file, I am attempting to blink 2 LEDs connected to the RP2350
-* GPIO ports via 2 tasks using a mutex to control access to execution. 
-
+* Source file showcasing more simple interaction with a mutex. 
+*
 * Takeaways:
 * [] Declaring, Initializing, obtaining, and releasing mutexes
 * [] Typedef a data structure used for task creation and execution

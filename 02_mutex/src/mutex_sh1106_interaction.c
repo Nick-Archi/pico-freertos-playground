@@ -1,6 +1,7 @@
 /*
 * Objective:
-* Create a task that will print to the SH1106 OLED via the sbm library 
+* Create a task that will print to the SH1106 OLED via the sbm library
+* utilizing obtaining a mutex. 
 *
 * Takeaways:
 * [] Declaring, Initializing, obtaining, and releasing mutexes

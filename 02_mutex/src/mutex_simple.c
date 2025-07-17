@@ -1,3 +1,11 @@
+/*
+* Objective:
+* Source file showcasing simple interaction with a mutex. 
+*
+* Takeaways:
+* [] Declaring, Initializing, obtaining, and releasing mutexes
+*/
+
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
