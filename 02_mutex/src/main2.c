@@ -1,14 +1,16 @@
 /*
 * Objective:
 * In this source file, I am attempting to blink 2 LEDs connected to the RP2350
-* GPIO ports via 2 tasks. I am trying to implement a mutex in which will be held
-* for some time before being released.
+* GPIO ports via 2 tasks using a mutex to control access to execution. 
 
 * Takeaways:
 * [] Declaring, Initializing, obtaining, and releasing mutexes
+* [] Typedef a data structure used for task creation and execution
+* [] Creating a generic task and casting the parameter into a data type
 */
 
 #include <stdio.h>
+#include <string.h>
 
 #include "FreeRTOS.h"
 #include "queue.h"
@@ -16,6 +18,9 @@
 #include "task.h"
 
 #include "pico/stdlib.h"
+#include "hadware/spi.h"
+
+#include "SH1106_Interactions.h"
 
 #define LED_OFF 0
 #define LED_ON 1
