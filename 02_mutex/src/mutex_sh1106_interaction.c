@@ -1,7 +1,7 @@
 /*
 * Objective:
 * Create a task that will print to the SH1106 OLED via the sbm library
-* utilizing obtaining a mutex. 
+* by utilizing a mutex. 
 *
 * Takeaways:
 * [] Declaring, Initializing, obtaining, and releasing mutexes
@@ -48,18 +48,23 @@ static oled_config task2;
 void vTask(void* pvParameters)
 {
     oled_config config = *(oled_config*)pvParameters;
-    char buffer[] = {1,1,1,1,0};
+    char buffer1[7]; // null char included..
+    char buffer2[5];
 
     while(true)
     {
+        int size1 = sprintf(buffer1, "Task %d", config.task);
+        // use sprintf to update a buffer of 0000 with the number
+        int size2 = sprintf(buffer2, "%04d", config.val);
+
         // attempt to obtain mutex
-            // write to OLED
-            itoa(config.val, buffer, 10);
-            write_string(buffer, config.page, 0, sizeof(buffer) * 8);
         if(xSemaphoreTake(mutex, pdMS_TO_TICKS(portMAX_DELAY)))
         {
+            write_string(buffer1, config.page, 0, size1 * 8);
+            write_string(buffer2, config.page+1, 0, size2 * 8);
 //printf("Task %d obtained mutex...attempting to write to queue\n", config.task);
 //printf("Buffer = %s\n", buffer);
+            // write to OLED
             update_sh1106();
 
             xSemaphoreGive(mutex);
@@ -98,7 +103,7 @@ int main()
 
     task2.task = 2;
     task2.delay = 5000;
-    task2.page = 4;
+    task2.page = 3;
     task2.val = 1; 
 
     xTaskCreate(vTask, "Producer 1", 256, &task1, 1, NULL); 
