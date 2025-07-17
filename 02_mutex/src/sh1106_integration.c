@@ -51,10 +51,10 @@ void vProducer(void* pvParameters)
     while(true)
     {
         // attempt to obtain mutex
-        if(xSemaphoreTake(mutex, pdMS_TO_TICKS(0) == pdPASS))
+        if(xSemaphoreTake(mutex, pdMS_TO_TICKS(portMAX_DELAY) == pdPASS))
         {
 printf("Task obtained mutex...attempting to write to queue\n");
-            xQueueSend(q_handle, (const void*) &config, pdMS_TO_TICKS(0));
+            xQueueSend(q_handle, (const void*) &config, pdMS_TO_TICKS(portMAX_DELAY));
             xSemaphoreGive(mutex);
             config.val++;
             vTaskDelay(100);
@@ -69,7 +69,7 @@ void vConsumer(void* pvParameters)
     BaseType_t status;
     while(true)
     {
-        status = xQueueReceive(q_handle, &config, pdMS_TO_TICKS(100));
+        status = xQueueReceive(q_handle, &config, pdMS_TO_TICKS(portMAX_DELAY));
        
         if(status == pdPASS)
         {
@@ -104,7 +104,7 @@ int main()
 
     // setup
     mutex = xSemaphoreCreateMutex();
-    q_handle = xQueueCreate(3, sizeof(oled_config));
+    q_handle = xQueueCreate(1, sizeof(oled_config));
     task1.page = 3;
     task1.val = 0;
     task2.page = 4;
