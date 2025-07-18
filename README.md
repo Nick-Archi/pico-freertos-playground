@@ -22,9 +22,11 @@ I've taken source files from the freeertos example project from the pico-example
 
 Because of this, I've tried making the cmake build as generic as possible. Taking into account that the FREERTOS_KERNEL_PATH and PICO_SDK_PATH environment variables need to be set and building should succeed. 
 
-## Topics
+## Accomplishments
 
 Some things I want to accomplish:<br> 
+- [] Multiple tasks blinking LEDs
+- [] Multiple tasks writing to SH1106 OLED
 [] ...coming soon!
 
 ## References
@@ -34,6 +36,7 @@ Raspberry Pi Pico High Level Doc: [Link](https://www.raspberrypi.com/documentati
 Raspberry Pi Pico2 Pinout PDF: [Link](https://datasheets.raspberrypi.com/pico/Pico-2-Pinout.pdf)<br>
 Raspberry Pi Pico Examples Repo: [Link](https://github.com/raspberrypi/pico-examples)<br>
 FreeRTOS Kernel Repo: [Link](https://github.com/FreeRTOS/FreeRTOS-Kernel/tree/main)<br>
+SBM(Simple Bit Map) Repo: [Link](https://github.com/Nick-Archi/sbm)<br>
 - various youtube sources, will post eventually
 
 ## Contact

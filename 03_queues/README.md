@@ -1,4 +1,4 @@
-# FreeRTOS Pico Program 02: Mutexes 
+# [WIP]FreeRTOS Pico Program 03: Queues 
 
 ## Table of Content
 [Overivew](#overview)<br>
@@ -9,18 +9,18 @@
 [Learnings](#learnings)<br>
 
 ## Overview
-A mutex allows tasks to share a resource, effectively limiting the usage of that resource to just 1 task. Once the task is done, it gives up the mutex for another task to then take. In this project, I want to showcase some simple examples of using a mutex as well as an example showcasing the usage of the sbm library I've been working on to interact with an OLED as the shared resource.
+A queue (FIFO) could be used as a form of IPC between different tasks. I want to have a couple of examples showcasing how different tasks can utilize a queue for their own purposes. Queues in FreeRTOS are thread safe so it should be fine for multiple tasks(threads) to interact with a queue. 
  
 ## Objective
-- [] Executable that spins up tasks to utilize a mutex to interact with a shared resource (OLED).
+- [] Executable that shows tasks utilizing a mutex to interact with a shared resource (OLED).
+- [] Mailbox shared between tasks in a producer(s) and consumer example.
+- [] Queue set utilized in FreeRTOS.
 
 ## Setup
 Modify the FreeRTOSConfig.h:
 - Update the configMAX_PRIORITES
 - Enable Time Slicing
     - update configUSE_TIME_SLICING = 1
-- Enable Mutual Exclusion
-    - configUSE_MUTEXES = 1
 - Enable indefinite waits
     - INCLUDE_vTaskSuspend = 1
 
@@ -56,6 +56,5 @@ Flash the built .uf2 file onto the Raspberry Pi Pico
 
 ## Learnings
 ```
-- [] Had to figure out an approach to showcasing 2 different numbers (eg, 2 and 999) properly on the OLED without it getting overwritten. Used sprinttf to modify a char* buffer.
-- [] Sending a generic void* that would then be typecasted into the struct I created, makes it easier to pass information to generic task functions.
+
 ```
