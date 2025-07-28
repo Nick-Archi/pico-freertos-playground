@@ -12,7 +12,7 @@
 A queue (FIFO) could be used as a form of IPC between different tasks. I want to have a couple of examples showcasing how different tasks can utilize a queue for their own purposes. Queues in FreeRTOS are thread safe so it should be fine for multiple tasks(threads) to interact with a queue. 
  
 ## Objective
-- [] Executable that shows tasks utilizing a mutex to interact with a shared resource (OLED).
+- [] Producer and Consumer example
 - [] Mailbox shared between tasks in a producer(s) and consumer example.
 - [] Queue set utilized in FreeRTOS.
 
