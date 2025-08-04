@@ -29,6 +29,8 @@ Modify the FreeRTOSConfig.h:
     - configUSE_TIMERS = 1
 - Change Timer priority
     - configTIMER_TASK_PRIORITY
+    
+![Button, Pico, & OLED setup to mess around w/ ISRs & IRQs](images/push_button_n_oled.jpg)
 
 ## Building
 
