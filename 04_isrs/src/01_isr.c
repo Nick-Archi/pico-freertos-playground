@@ -11,7 +11,7 @@
 * [] task samples the gpio pin after some time (de-bounce logic)
 */
 
-#define DBG 0
+//#define DBG 0
 #define DEBOUNCE_MS 50
 
 // C libraries
@@ -68,9 +68,11 @@ void vSampleButtonTimer();
 void vOledTask(void* pvParameters)
 {
     oled_config* config = (oled_config*)pvParameters;
-    char buffer1[7];
+//    char buffer1[7];
     char buffer2[5];
+#ifdef DBG
     uint16_t presses = 0;
+#endif
     while(true)
     {
         xSemaphoreTake(sema, portMAX_DELAY);
@@ -89,6 +91,10 @@ printf("Presses: %d\n", ++presses);
     }
 }
 
+/*
+* @brief ISR that will fire when GPIO signal is low
+*
+*/
 void vButtonHandlerISR()
 {
     gpio_set_irq_enabled(button1.gpio, GPIO_IRQ_EDGE_FALL, false);
@@ -147,6 +153,10 @@ printf("starting...\n");
     return 0;
 }
 
+/*
+* @brief Function that is called when Timer expires to release semaphore
+*
+*/
 void vSampleButtonTimer()
 {
     xSemaphoreGive(sema);
