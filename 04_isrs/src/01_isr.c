@@ -12,7 +12,7 @@
 */
 
 //#define DBG 0
-#define DEBOUNCE_MS 50
+#define DEBOUNCE_MS 10
 
 // C libraries
 #include <stdio.h>
@@ -30,7 +30,12 @@
 #include "hardware/gpio.h"
 
 // sbm includes
-#include "SH1106_Interactions.h"
+//#include "SH1106_Interactions.h"
+#include "display.h"
+#include "driver.h"
+#include "sh1106_driver.h"
+#include "spi_transport.h"
+#include "transport.h"
 
 SemaphoreHandle_t sema;
 TimerHandle_t h_debounce;
@@ -57,6 +62,23 @@ static oled_config task1;
 // led object
 static button_state button1;
 
+// sh1106 display object
+Display sh1106_display;
+DisplayPages sh1106_pgs[SH1106_PAGES];
+DisplayPageInfo sh1106_info[SH1106_PAGES];
+uint8_t sh1106_buffer[(SH1106_WIDTH * SH1106_HEIGHT) / 8];
+
+SpiTransportConfig sh1106_ctx = 
+{
+    .spi = SPI_PORT,
+    .cs = OLED_CS,
+    .clk = OLED_CLK,
+    .dc = OLED_POCI,
+    .pico = OLED_PICO,
+    .rst = OLED_RST,
+    .baud = BAUD
+};
+
 static void setupOledConfig(oled_config* dst, oled_config src);
 static void setupButtonConfig(button_state* dst, button_state src);
 
@@ -76,17 +98,20 @@ void vOledTask(void* pvParameters)
     while(true)
     {
         xSemaphoreTake(sema, portMAX_DELAY);
-//        int size1 = sprintf(buffer1, "Task %d", config->task);
-        // use sprintf to update a buffer of 0000 with the number
-        int size2 = sprintf(buffer2, "%04d", config->val);
+        if(gpio_get(button1.gpio) == 0)
+        {
+//          int size1 = sprintf(buffer1, "Task %d", config->task);
+            // use sprintf to update a buffer of 0000 with the number
+            int size2 = sprintf(buffer2, "%04d", config->val);
 
-//        write_string(buffer1, config->page, 0, size1 * 8);
-        write_string(buffer2, config->page+1, 0, size2 * 8);
-        update_sh1106();
-        config->val++;
+//          write_string(buffer1, config->page, 0, size1 * 8);
+            display_write_string(&sh1106_display, buffer2, config->page+1, 0, size2 * 8);
+            display_update(&sh1106_display);
+            config->val++;
 #ifdef DBG
 printf("Presses: %d\n", ++presses);
 #endif
+        }
         gpio_set_irq_enabled(button1.gpio, GPIO_IRQ_EDGE_FALL, true);
     }
 }
@@ -101,19 +126,17 @@ void vButtonHandlerISR()
     xTimerStartFromISR(h_debounce, 0);
 }
 
-void setup_oled(void)
+void setup_sh1106(void)
 {
-    init_SH1106(
-        POCI,
-        RST,
-        CS,
-        PICO,
-        CLK
-    );
+    setup_display_sh1106(&sh1106_display, sh1106_pgs, sh1106_info, SH1106_WIDTH, SH1106_HEIGHT, SH1106_PAGES, sh1106_buffer);
 
-    begin_sh1106();
-    set_buffer();
-    clear_buffer();
+    sh1106_display.ctx = (void*)&sh1106_ctx;
+    
+    spi_transport_init((SpiTransportConfig*)sh1106_display.ctx);
+    
+    display_init(&sh1106_display);
+    
+    display_clear(&sh1106_display);    
 }
 
 int main()
@@ -128,7 +151,7 @@ int main()
     gpio_pull_up(button1.gpio);
 
     stdio_init_all();
-    setup_oled();
+    setup_sh1106();
 #ifdef DBG
 sleep_ms(10000); //[TODO] give me time to connect via minicom
 printf("starting...\n");

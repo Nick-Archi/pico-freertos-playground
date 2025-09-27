@@ -32,6 +32,10 @@ target_link_libraries(${EXEC1_NAME}
 
 # edits for sbm integration
 target_include_directories(${EXEC1_NAME} PUBLIC /usr/local/include/sbm)
+target_include_directories(${EXEC1_NAME} PUBLIC /usr/local/include/sbm/bitmaps)
+target_include_directories(${EXEC1_NAME} PUBLIC /usr/local/include/sbm/display)
+target_include_directories(${EXEC1_NAME} PUBLIC /usr/local/include/sbm/driver)
+target_include_directories(${EXEC1_NAME} PUBLIC /usr/local/include/sbm/transport)
 target_include_directories(${EXEC1_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 # edit for sbm integration
